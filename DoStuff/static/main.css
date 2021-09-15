@@ -1,0 +1,322 @@
+/* OGÓLNE */
+
+
+html, body
+{
+    display: block;
+    background-color: #1e1e2f;
+    color: #fff;
+    height: 100%
+}
+
+
+
+/* KONIEC OGÓLNYCH */
+
+
+/* NAVBAR */
+
+.navbar
+{
+    background-color: #ba54f5 !important;
+    text-decoration: none;
+    color: #fff !important;
+
+}
+
+.navbar a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar .form-control
+{
+    color: #fff;
+}
+
+.navbar .form-control::placeholder
+{
+    color: #fff;
+}
+
+.navbar .navbar-nav .dropdown-menu
+{
+    background-color: #ba54f5;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+    padding: 10px;
+    border-top: 2px solid #1e1e2f;
+}
+
+.navbar .navbar-nav .dropdown-menu a:hover
+{
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+}
+
+
+
+/* NAVBAR KONIEC */
+
+
+/* WRAPPER */
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    background-color: #1e1e2f;
+}
+
+/* WRAPPER KONIEC */
+
+
+/* SIDEBAR */
+
+#sidebar {
+    min-width: 305px;
+    max-width: 305px;
+    min-height: 100vh;
+    background-color: #1e1e2f;
+    transition: all 0.3s;
+}
+
+#sidebar .section
+{
+    border-radius: 15px;
+    padding: 20px 20px 20px 0px;
+    background-color: #ba54f5;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#sidebar a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background-color: #1e1e2f;
+}
+
+#sidebar.active {
+    margin-left: -305px;
+}
+
+
+#sidebar ul.components {
+    padding: 20px 20px;
+
+}
+
+
+#sidebar ul:active
+{
+    border-radius: 16px;
+    padding: 20px;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li:hover
+{
+    border-radius: 12px 12px 12px 12px;
+}
+
+#sidebar ul li a {
+    padding: 16px;
+    font-size: 1.1em;
+    display: block;
+
+    border-radius: 12px 12px 0px 0px;
+}
+
+#sidebar ul li:hover > a{
+    color: #fff;
+    background: #1e1e2f;
+    border-radius: 12px 12px 0px 0px;
+}
+
+#sidebar ul li:hover >a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #1e1e2f;
+    border-radius: 12px 12px 12px 12px;
+}
+
+#sidebar ul li:hover >a[aria-expanded="true"] {
+    color: #fff;
+    background: #1e1e2f;
+    border-radius: 12px 12px 0px 0px;
+}
+
+
+#sidebar ul li.active ul {
+    background-color: #1e1e2f;
+    border-radius: 0px 0px 12px 12px;
+    padding: 0px 0px 12px 0px;
+
+}
+
+#sidebar ul li.active ul:hover {
+    color: #ba54f5;
+    background-color: #1e1e2f;
+    border-radius: 0px 0px 12px 12px;
+}
+
+
+#sidebar ul  li  li {
+    color: #ba54f5;
+
+}
+
+#sidebar ul li ul li:hover{
+    color: #fff;
+    background: #1e1e2f;
+    border-radius: 16px 16px 16px 16px;
+}
+
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background-color: #1e1e2f;
+    color: #fff;
+}
+
+
+#sidebar ul ul a:hover
+{
+    background-color: #1e1e2f;
+    opacity: 0.5;
+}
+
+
+
+/*
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+*/
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+.sidebarCollapse
+{
+    background-color: #ba54f5;
+}
+
+
+/* SIDEBAR KONIEC */
+
+
+/* CONTENT */
+
+.content
+{
+    width: 100%;
+    padding: 20px 40px;
+    min-height: 100vh;
+}
+
+
+/* CONTENT-HEADER */
+
+#view_header {
+
+    min-height: 100px;
+    background-color: #1e1e2f;
+
+}
+
+#view_header .row
+{
+    padding: 22px 0px;
+    font-size: 1.5em;
+    position:relative;
+
+}
+
+
+
+
+#view_header .dropdown-menu
+{
+    background-color: #ba54f5;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+    padding: 10px;
+    border-top: 2px solid #1e1e2f;
+}
+
+#view_header .dropdown-menu a:hover
+{
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+}
+
+#view_header .dropdown-menu a
+{
+    color: #fff;
+}
+
+
+/* CONTENT-HEADER KONIEC */
+
+.content .row .project
+{
+    background-color: #32325d;
+    padding: 16px;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.content .row .project .section-header
+{
+    padding-bottom: 5px;
+
+}
+
+/* CONTENT KONIEC */
+
+
+.anon .container
+{
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.anon .container .form-group
+{
+    background-color: #32325d;
+    padding: 10px;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.anon .container  .btn {
+    background-color: #32325d;
+    padding: 10px;
+    border-radius: 12px 12px 12px 12px;
+}
+

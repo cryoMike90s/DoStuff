@@ -1,0 +1,84 @@
+{% extends 'layouts/anonymous.html' %}
+
+{% block content %}
+
+
+
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+
+                <div class="form-group">
+                    <label for="mail">{{ form.email.label }}</label>
+
+                    {% if form.email.errors %}
+                    <input type="email" class="form-control is-invalid" id="mail_invalid" name="email">
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span> {{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <input type="email" class="form-control" id="mail" placeholder="name@example.com" name="email">
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="user">{{ form.user_name.label }}</label>
+
+                    {% if form.user_name.errors %}
+                        <input type="text" class="form-control is-invalid" id="user_invalid" name="user_name">
+                        <div class="invalid-feedback">
+                            {% for error in form.user_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <input type="text" class="form-control" id="user" name="user_name">
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="password_form">{{ form.password.label }}</label>
+
+                    {% if form.password.errors %}
+                        <input type="password" class="form-control is-invalid" id="password_invalid" name="password">
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <input type="password" class="form-control" id="password_form" name="password">
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirmation_form">{{ form.password_confirmation.label }}</label>
+
+                    {% if form.password_confirmation.errors %}
+                    <input type="password" class="form-control is-invalid" id="password_confirmation_invalid" name="password_confirmation">
+                    <div class="invalid-feedback">
+                        {% for error in form.password_confirmation.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <input type="password" class="form-control" id="password_confirmation_form" name="password_confirmation">
+                    {% endif %}
+                </div>
+
+
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit_me(class="btn btn-outline-info btn-block") }}
+            </div>
+
+        </form>
+
+
+
+
+{% endblock content %}

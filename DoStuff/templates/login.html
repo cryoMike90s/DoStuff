@@ -1,0 +1,65 @@
+{% extends 'layouts/anonymous.html' %}
+
+{% block content %}
+
+
+
+    <form action="" method="POST">
+
+      {{ form.hidden_tag() }}
+
+      <fieldset class="form-group">
+
+        <div class="form-group">
+          <label for="mail">{{ form.email.label }}</label>
+
+          {% if form.email.errors %}
+          <input type="email" class="form-control is-invalid" id="mail_invalid" name="email">
+          <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span> {{ error }}</span>
+            {% endfor %}
+          </div>
+          {% else %}
+          <input type="email" class="form-control" id="mail" placeholder="name@example.com" name="email">
+          {% endif %}
+        </div>
+
+
+        <div class="form-group">
+          <label for="password_form">{{ form.password.label }}</label>
+
+          {% if form.password.errors %}
+          <input type="password" class="form-control is-invalid" id="password_invalid" name="password">
+          <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+          {% else %}
+          <input type="password" class="form-control" id="password_form" name="password">
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.remember_me(class="form-check-input") }}
+          {{ form.remember_me.label(class="form-check-label") }}
+        </div>
+
+      </fieldset>
+
+      <div class="form-group">
+        {{ form.log_in(class="btn btn-outline-info btn-block") }}
+      </div>
+
+    </form>
+
+  <a href="{{ url_for('users.register') }}">
+  <button class="btn btn-outline-light  btn-block">Sign Up!</button>
+  </a>
+
+
+
+
+
+{% endblock content %}
