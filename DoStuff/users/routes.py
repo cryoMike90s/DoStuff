@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, flash, url_for, request
-from DoStuff.users.forms import RegisterForm, LoginForm
+from DoStuff.users.forms import RegisterForm, LoginForm, UpdateAccountForm
 from DoStuff.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from DoStuff import db, bcrypt
+from DoStuff.users.utilis import save_image
 
 users = Blueprint('users', __name__)
 
@@ -45,3 +46,26 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('users.login'))
+
+
+@users.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_image(form.picture.data)
+            current_user.img_file = picture_file
+        current_user.user_name = form.user_name.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash("Changes saved", "succes")
+        return redirect(url_for('users.account'))
+    elif request.method == "GET":
+        form.user_name.data = current_user.user_name
+        form.email.data = current_user.email
+
+    img_file = url_for('static', filename='images/' + current_user.img_file)
+
+    return render_template('account.html', title="Account", form=form, img_file=img_file)
+

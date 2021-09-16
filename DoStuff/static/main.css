@@ -300,6 +300,8 @@ html, body
 /* CONTENT KONIEC */
 
 
+/* ANONYMOUS */
+
 .anon .container
 {
     min-height: 100%;
@@ -319,4 +321,26 @@ html, body
     padding: 10px;
     border-radius: 12px 12px 12px 12px;
 }
+
+/* ANONYMOUS ENDS */
+
+/* ACCOUNT */
+
+
+
+.container .account-img
+{
+    height: 125px;
+    width: 125px;
+
+}
+
+.container #account-info
+{
+    display: flex;
+    align-content: center;
+
+}
+
+
 
