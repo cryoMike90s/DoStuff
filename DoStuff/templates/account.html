@@ -1,0 +1,83 @@
+{% extends 'layouts/design.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form action="" method="POST" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+
+                <fieldset class="form-group">
+
+                    <div class="form-group">
+                        <label for="mail">{{ form.email.label }}</label>
+
+                        {% if form.email.errors %}
+                        <input type="email" class="form-control is-invalid" id="mail_invalid" name="email">
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <input type="email" class="form-control" id="mail" placeholder="name@example.com" name="email" value="{{ current_user.email }}">
+                        {% endif %}
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="user">{{ form.user_name.label }}</label>
+
+                        {% if form.user_name.errors %}
+                        <input type="text" class="form-control is-invalid" id="user_invalid" name="user_name" >
+                        <div class="invalid-feedback">
+                            {% for error in form.user_name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <input type="text" class="form-control" id="user" name="user_name" value="{{ current_user.user_name }}">
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file">{{ form.picture.label }}</label>
+                        <input type="file" class="form-control-file" id="file" name="picture">
+
+                        {% if form.picture.errors %}
+                            {% for error in form.picture.errors %}
+                                <span class="text-danger">{{ error }}</span><br />
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+
+
+                </fieldset>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info btn-block") }}
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-6 px-auto" style="display: flex; align-content: center">
+        <div id="account-info">
+
+            <img class="rounded-circle account-img" src="{{ img_file }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ current_user.user_name }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+{% endblock content %}
