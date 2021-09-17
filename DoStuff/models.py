@@ -24,6 +24,17 @@ class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     project_name = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    tasks = db.relationship('Tasks', backref='parent', lazy=True)
 
     def __repr__(self):
-        return "Projects( '{}', '{}')".format(self.title, self.date_posted)
+        return "Projects( '{}')".format(self.title)
+
+
+class Tasks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String, nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    project_parent = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+
+    def __repr__(self):
+        return "Tasks( '{}, {}')".format(self.task_name, self.content)

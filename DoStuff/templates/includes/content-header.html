@@ -2,8 +2,9 @@
 
 <header id="view_header">
     <div class="row flex-nowrap justify-content-between align-items-center">
+
         <div class="col-4 ">
-            <h1>Project title</h1>
+            <h1> {{ project_number.project_name }}</h1>
         </div>
 
         <div class="col-4 d-flex justify-content-end align-items-center" style="padding-right:50px;">
@@ -17,7 +18,7 @@
                         </svg>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
+                        <button type="button" class="btn btn-success btn-sm mt-1 mb-1" data-toggle="modal" data-target="#AddModal">Add Task</button>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
@@ -28,5 +29,70 @@
         </div>
     </div>
 
-
 </header>
+
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddModalLabel">Add Task?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('tasks.add_task', project_id=project_number.id) }}">
+                    {{ form.hidden_tag()  }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">{{ legend }}</legend>
+
+                        <div class="form-group">
+                            {{ form.task_name.label(class="form-control-label") }}
+
+                            {% if form.task_name.errors %}
+
+                            {{ form.task_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.task_name.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            {% else %}
+                            {{ form.task_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.content.label(class="form-control-label") }}
+
+                            {% if form.content.errors %}
+
+                            {{ form.content(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            {% else %}
+                            {{ form.content(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+
+
+
+                            <input class="btn btn-success" type="submit" value="Add">
+
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
