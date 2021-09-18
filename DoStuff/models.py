@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(60), nullable=False)
     img_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    projects = db.relationship('Projects', backref='owner', lazy=True)
+    projects = db.relationship('Projects', backref='owner', cascade='all,delete', lazy=True)
 
     def __repr__(self):
         return "User( '{}', '{}', '{}')".format(self.user_name, self.email, self.image_file)
@@ -24,7 +24,7 @@ class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     project_name = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    tasks = db.relationship('Tasks', backref='parent', lazy=True)
+    tasks = db.relationship('Tasks', backref='parent', cascade='all,delete', lazy=True)
 
     def __repr__(self):
         return "Projects( '{}')".format(self.title)

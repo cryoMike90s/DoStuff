@@ -19,9 +19,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <button type="button" class="btn btn-success btn-sm mt-1 mb-1" data-toggle="modal" data-target="#AddModal">Add Task</button>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <button type="button" class="btn btn-success btn-sm mt-1 mb-1" data-toggle="modal" data-target="#UpdateProjectModal">Update Project</button>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <button type="button" class="btn btn-success btn-sm mt-1 mb-1" data-toggle="modal" data-target="#DeleteProjectModal">Delete Project</button>
                     </div>
                 </li>
             </ul>
@@ -81,8 +81,6 @@
                         </div>
 
 
-
-
                             <input class="btn btn-success" type="submit" value="Add">
 
 
@@ -91,7 +89,74 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="UpdateProjectModal" tabindex="-1" role="dialog" aria-labelledby="#UpdateProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="#UpdateProjectModalLAble">Add Task?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('tasks.update_project', project_id=project_number.id) }}">
+                    {{ form_update.hidden_tag()  }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">{{ legend }}</legend>
+
+                        <div class="form-group">
+                            {{ form_update.project_name.label(class="form-control-label") }}
+
+                            {% if form_update.project_name.errors %}
+
+                            {{ form_update.project_name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_update.project_name.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            {% else %}
+                            {{ form_update.project_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+
+                        <input class="btn btn-success" type="submit" value="Update">
+
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DeleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="#DeleteProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="#DeleteProjectModalLAble">Delete Project?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('tasks.delete_project', project_id=project_number.id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
             </div>
         </div>
     </div>
