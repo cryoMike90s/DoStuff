@@ -52,6 +52,10 @@
         {{ form.log_in(class="btn btn-outline-info btn-block") }}
       </div>
 
+      <small class="text-muted ml-2">
+        <a href="{{ url_for('users.reset_password') }}">Forgot password?</a>
+      </small>
+
     </form>
 
   <a href="{{ url_for('users.register') }}">

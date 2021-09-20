@@ -6,6 +6,7 @@ from DoStuff.models import User
 from flask_login import current_user
 
 
+
 class RegisterForm(FlaskForm):
     user_name = StringField('User', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -51,3 +52,20 @@ class UpdateAccountForm(FlaskForm):
             user_email = User.query.filter_by(email=email.data).first()
             if user_email:
                 raise ValidationError('That email is already taken. Please choose a different one.')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    request = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        user_email = User.query.filter_by(email=email.data).first()
+        if user_email is None:
+            raise ValidationError("That email address does not exists in our base")
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    reset = SubmitField('Reset Password')
+
