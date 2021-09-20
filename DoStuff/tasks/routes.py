@@ -23,6 +23,7 @@ def new_project():
 def specific_project(project_id):
     form = TaskForm()
     form_update = ProjectForm()
+    task_form_update = TaskForm()
     project_number = Projects.query.get_or_404(project_id)
     tasks = Tasks.query.filter_by(project_parent=project_id)
     return render_template('project_and_tasks.html',
@@ -30,17 +31,17 @@ def specific_project(project_id):
                            project_list=project_list(),
                            tasks=tasks,
                            form=form,
-                           form_update=form_update)
+                           form_update=form_update,
+                           task_form_update=task_form_update)
 
 
 @tasks.route('/home/<int:project_id>/update', methods=['POST'])
 def update_project(project_id):
     form_update = ProjectForm()
     pec_project = Projects.query.get_or_404(project_id)
-    if request.method == 'POST':
-        pec_project.project_name = form_update.project_name.data
-        db.session.commit()
-        return redirect(url_for('tasks.specific_project', project_id=str(pec_project.id)))
+    pec_project.project_name = form_update.project_name.data
+    db.session.commit()
+    return redirect(url_for('tasks.specific_project', project_id=str(pec_project.id)))
 
 
 
@@ -57,11 +58,10 @@ def delete_project(project_id):
 def add_task(project_id):
     form = TaskForm()
     project_number = Projects.query.get_or_404(project_id)
-    if request.method == 'POST':
-        task = Tasks(task_name=form.task_name.data, content=form.content.data, parent=project_number)
-        db.session.add(task)
-        db.session.commit()
-        return redirect(url_for('tasks.specific_project', project_id=str(project_number.id)))
+    task = Tasks(task_name=form.task_name.data, content=form.content.data, parent=project_number)
+    db.session.add(task)
+    db.session.commit()
+    return redirect(url_for('tasks.specific_project', project_id=str(project_number.id)))
 
 
 @tasks.route('/home/<int:task_id>/delete_task', methods=['POST'])
@@ -72,6 +72,16 @@ def delete_task(task_id):
     project_number = Projects.query.get_or_404(task.project_parent)
     return redirect(url_for('tasks.specific_project', project_id=str(project_number.id)))
 
+
+@tasks.route('/<int:task_id>/update', methods=['POST'])
+def update_task(task_id):
+    task_form_update = TaskForm()
+    task = Tasks.query.get_or_404(task_id)
+    project_number = Projects.query.get_or_404(task.project_parent)
+    task.task_name = task_form_update.task_name.data
+    task.content = task_form_update.content.data
+    db.session.commit()
+    return redirect(url_for('tasks.specific_project', project_id=str(project_number.id)))
 
 
 

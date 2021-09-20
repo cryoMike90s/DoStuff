@@ -1,9 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import *
 from typing import Callable
-from DoStuff.config import Config
+from config import Config
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 
 class MySQLAlchemy(SQLAlchemy):
@@ -17,6 +18,7 @@ class MySQLAlchemy(SQLAlchemy):
 
 
 db = MySQLAlchemy()
+migrate = Migrate()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'users.login'
@@ -26,9 +28,10 @@ login_manager.login_message_category = 'info'
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config) #Configuration from specific file
+    app.config.from_object(config_class) #Configuration from specific file
 
     db.init_app(app)
+    migrate.init_app(app, db)
     bcrypt.init_app(app)
     login_manager.init_app(app)
 

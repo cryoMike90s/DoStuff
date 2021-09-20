@@ -297,6 +297,11 @@ html, body
 
 }
 
+.content .row > *
+{
+    padding: 15px;
+}
+
 /* CONTENT KONIEC */
 
 

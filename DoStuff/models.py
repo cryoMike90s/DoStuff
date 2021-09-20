@@ -1,5 +1,6 @@
 from DoStuff import db, login_manager
 from flask_login import UserMixin
+from datetime import datetime
 
 # handle session in the background, decorator puprose to give information for extension that this is the function to get
 # user by an ID
@@ -23,6 +24,7 @@ class User(db.Model, UserMixin):
 class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     project_name = db.Column(db.String(100), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     tasks = db.relationship('Tasks', backref='parent', cascade='all,delete', lazy=True)
 

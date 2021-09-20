@@ -7,26 +7,11 @@
 
         <div class="section">
         <ul class="list-unstyled components">
-
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Projects</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Home 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
-            </li>
             <li>
-                <a href="#"> Project 1 </a>
+                <a href="{{ url_for('tasks.new_project') }}">New Project</a>
             </li>
             <li class="active">
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Projects</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     {% for project_nav in project_list %}
                     <li>
@@ -39,9 +24,7 @@
             <li>
                 <a href="#">Portfolio</a>
             </li>
-            <li>
-                <a href="{{ url_for('tasks.new_project') }}">Contact</a>
-            </li>
+
         </ul>
 
         </div>
