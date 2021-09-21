@@ -1,41 +1,61 @@
-from flask import Blueprint, render_template, redirect, url_for, request
-from DoStuff.models import User, Projects, Tasks
+from flask import Blueprint, render_template, redirect, url_for, request, abort, g
+from DoStuff.models import Projects, Tasks
 from flask_login import current_user
 from DoStuff.tasks.forms import ProjectForm, TaskForm
 from DoStuff import db
 from DoStuff.tasks.utilis import project_list
+from flask_login import login_required
+
+
 
 tasks = Blueprint('tasks', __name__)
 
 
-@tasks.route('/project/new',  methods=['GET', 'POST'])
-def new_project():
-    form = ProjectForm()
-    if form.validate_on_submit():
-        project = Projects(project_name=form.project_name.data, owner=current_user)
-        db.session.add(project)
-        db.session.commit()
-        return redirect(url_for('main.home'))
-    return render_template('new_project.html', form=form)
 
+# @tasks.route('/project/new',  methods=['GET', 'POST'])
+# @login_required
+# def new_project():
+#     form = ProjectForm()
+#     if form.validate_on_submit():
+#         project = Projects(project_name=form.project_name.data, owner=current_user)
+#         db.session.add(project)
+#         db.session.commit()
+#         return redirect(url_for('main.home'))
+#     return render_template('new_project.html', form=form)
+
+
+@tasks.route('/project/new2', methods=['POST'])
+@login_required
+def new_project_2():
+    new_project_form = ProjectForm()
+    project = Projects(project_name=new_project_form.project_name.data, owner=current_user)
+    db.session.add(project)
+    db.session.commit()
+    return redirect(url_for('main.home'))
 
 @tasks.route('/home/<int:project_id>')
+@login_required
 def specific_project(project_id):
+    project_number = Projects.query.get_or_404(project_id)
+    if project_number.owner != current_user:
+        abort(403)
     form = TaskForm()
     form_update = ProjectForm()
     task_form_update = TaskForm()
-    project_number = Projects.query.get_or_404(project_id)
+    new_project_form = ProjectForm()
+
     tasks = Tasks.query.filter_by(project_parent=project_id)
     return render_template('project_and_tasks.html',
                            project_number=project_number,
-                           project_list=project_list(),
                            tasks=tasks,
                            form=form,
                            form_update=form_update,
-                           task_form_update=task_form_update)
+                           task_form_update=task_form_update,
+                           new_project_form=new_project_form)
 
 
 @tasks.route('/home/<int:project_id>/update', methods=['POST'])
+@login_required
 def update_project(project_id):
     form_update = ProjectForm()
     pec_project = Projects.query.get_or_404(project_id)
@@ -47,6 +67,7 @@ def update_project(project_id):
 
 
 @tasks.route('/home/<int:project_id>/delete', methods=['POST'])
+@login_required
 def delete_project(project_id):
     spec_project = Projects.query.get_or_404(project_id)
     db.session.delete(spec_project)
@@ -55,6 +76,7 @@ def delete_project(project_id):
 
 
 @tasks.route('/home/<int:project_id>/new_task', methods=['POST'])
+@login_required
 def add_task(project_id):
     form = TaskForm()
     project_number = Projects.query.get_or_404(project_id)
@@ -65,6 +87,7 @@ def add_task(project_id):
 
 
 @tasks.route('/home/<int:task_id>/delete_task', methods=['POST'])
+@login_required
 def delete_task(task_id):
     task = Tasks.query.get_or_404(task_id)
     db.session.delete(task)
@@ -74,6 +97,7 @@ def delete_task(task_id):
 
 
 @tasks.route('/<int:task_id>/update', methods=['POST'])
+@login_required
 def update_task(task_id):
     task_form_update = TaskForm()
     task = Tasks.query.get_or_404(task_id)

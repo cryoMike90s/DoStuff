@@ -8,16 +8,18 @@
         <div class="section">
         <ul class="list-unstyled components">
             <li>
-                <a href="{{ url_for('tasks.new_project') }}">New Project</a>
+                <button type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-toggle="modal" data-target="#NewProjectModal">New Project</button>
             </li>
             <li class="active">
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Projects</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    {% for project_nav in project_list %}
+
+                    {% for project_nav in project_list() %}
                     <li>
                         <a href="{{ url_for('tasks.specific_project', project_id=project_nav.id) }}">{{ project_nav.project_name }}</a>
                     </li>
                     {% endfor %}
+
 
                 </ul>
             </li>
@@ -30,4 +32,56 @@
         </div>
 
     </nav>
+
+
+
+    <div class="modal fade" id="NewProjectModal" tabindex="-1" role="dialog" aria-labelledby="NewProjectModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="NewProjectModalLabel">New Project?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ url_for('tasks.new_project_2') }}">
+                        {{new_project_form.hidden_tag()  }}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">{{ legend }}</legend>
+
+                            <div class="form-group">
+                                {{ new_project_form.project_name.label(class="form-control-label") }}
+
+                                {% if new_project_form.project_name.errors %}
+
+                                {{ new_project_form.project_name(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in new_project_form.project_name.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                {% else %}
+                                {{ new_project_form.project_name(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+
+
+                            <input class="btn btn-success" type="submit" value="Update">
+
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="{{ url_for('tasks.new_project_2') }}" method="POST">
+                        <input class="btn btn-info" type="submit" value="Update">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 

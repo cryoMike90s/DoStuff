@@ -44,11 +44,13 @@ def create_app(config_class=Config):
     from DoStuff.main.routes import main
     from DoStuff.tasks.routes import tasks
     from DoStuff.users.routes import users
+    from DoStuff.errors.handlers import errors
 
     #register of those Blueprints
     app.register_blueprint(main)
     app.register_blueprint(tasks)
     app.register_blueprint(users)
+    app.register_blueprint(errors)
 
     with app.app_context():
         db.create_all()

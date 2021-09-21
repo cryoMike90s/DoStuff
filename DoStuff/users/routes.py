@@ -5,6 +5,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from DoStuff import db, bcrypt
 from DoStuff.users.utilis import save_image
 from DoStuff.users.email import send_reset_email
+from DoStuff.tasks.forms import ProjectForm
 
 
 users = Blueprint('users', __name__)
@@ -45,6 +46,7 @@ def login():
 
 
 @users.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('users.login'))
@@ -54,6 +56,7 @@ def logout():
 @login_required
 def account():
     form = UpdateAccountForm()
+    new_project_form = ProjectForm()
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_image(form.picture.data)
@@ -69,7 +72,7 @@ def account():
 
     img_file = url_for('static', filename='images/' + current_user.img_file)
 
-    return render_template('account.html', title="Account", form=form, img_file=img_file)
+    return render_template('account.html', title="Account", form=form, img_file=img_file, new_project_form=new_project_form)
 
 @users.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
