@@ -6,21 +6,20 @@ from DoStuff.models import User
 from flask_login import current_user
 
 
-
 class RegisterForm(FlaskForm):
     user_name = StringField('User', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password_confirmation = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit_me = SubmitField('Submit')
+    submit_me = SubmitField('Register')
 
-    #Checking if input is already in database
+    #Checking if input (user_name) is already in database, is so, then user get message about it
     def validate_user_name(self, user_name):
         user = User.query.filter_by(user_name=user_name.data).first()
         if user:
             raise ValidationError('This username is already taken please choose different one')
 
-    #Checking if input is already in database
+    #Checking if input (email) is already in database
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
@@ -45,7 +44,6 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(user_name=user_name.data).first()
             if user:
                 raise ValidationError("This user name is already taken, please choose different one")
-
 
     def validate_email(self, email):
         if email.data != current_user.email:

@@ -13,6 +13,13 @@ def load_user(user_id):
 
 # inheritance from UserMixin class save us from writing a bunch of class like IsAnonymus or Active
 class User(db.Model, UserMixin):
+    """
+    SQLAlchemy database class for User, that inherits from db.Model base class of Flask-SQLAlchemy
+    Args:
+        db.Model: Base class of Flask SQLAlchemy
+        UserMixin:
+
+    """
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.String(120), nullable=False, unique=True)
@@ -21,6 +28,9 @@ class User(db.Model, UserMixin):
     projects = db.relationship('Projects', backref='owner', cascade='all,delete', lazy=True)
 
     def __repr__(self):
+        """
+        Method which tells Python how to print objects of class, useful for debugging
+        """
         return "User( '{}', '{}', '{}')".format(self.user_name, self.email, self.image_file)
 
     def get_secret_token(self, expiration_time=1800):

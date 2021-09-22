@@ -2,12 +2,14 @@
 
 {% block content %}
 
+<div class="holder">
+
 
 
         <form action="" method="POST">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                <h1 style="margin-bottom: 55px; margin-top: 20px; text-align: center"><strong>Register</strong></h1>
 
                 <div class="form-group">
                     <label for="mail">{{ form.email.label }}</label>
@@ -35,7 +37,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <input type="text" class="form-control" id="user" name="user_name">
+                        <input type="text" class="form-control" id="user" name="user_name" placeholder="Must have at least 6 characters">
                     {% endif %}
                 </div>
 
@@ -50,7 +52,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <input type="password" class="form-control" id="password_form" name="password">
+                        <input type="password" class="form-control" id="password_form" name="password" placeholder="Must have at least 6 characters">
                     {% endif %}
                 </div>
 
@@ -65,7 +67,7 @@
                         {% endfor %}
                     </div>
                     {% else %}
-                    <input type="password" class="form-control" id="password_confirmation_form" name="password_confirmation">
+                    <input type="password" class="form-control" id="password_confirmation_form" name="password_confirmation" placeholder="Repeat password">
                     {% endif %}
                 </div>
 
@@ -73,12 +75,20 @@
             </fieldset>
 
             <div class="form-group">
-                {{ form.submit_me(class="btn btn-outline-info btn-block") }}
+                {{ form.submit_me(class="btn btn-block") }}
             </div>
 
         </form>
 
+    <div id="back_to_login">
+
+        <a href="{{ url_for('users.login') }}">
+            Back to login
+        </a>
+
+    </div>
 
 
+</div>
 
 {% endblock content %}

@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
+<div class="container px-3 py-3">
+    <div class="row" style="background-color: #32325d; border-radius: 12px 12px 12px 12px; ">
         <div class="col-md-6">
             <form action="" method="POST" enctype="multipart/form-data">
 
@@ -58,20 +58,22 @@
                 </fieldset>
 
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info btn-block") }}
+                    {{ form.submit(class="btn  btn-block") }}
                 </div>
 
             </form>
         </div>
-        <div class="col-md-6 px-auto" style="display: flex; align-content: center">
-        <div id="account-info">
+        <div class="col-md-6 mx-auto my-auto" style=" align-content: center; text-align: center;">
 
-            <img class="rounded-circle account-img" src="{{ img_file }}">
+
+            <div style="padding-bottom: 35px">
+                <img class="rounded-circle account-img" src="{{ img_file }}">
+            </div>
             <div class="media-body">
                 <h2 class="account-heading">{{ current_user.user_name }}</h2>
                 <p class="text-secondary">{{ current_user.email }}</p>
             </div>
-        </div>
+
 
         </div>
     </div>

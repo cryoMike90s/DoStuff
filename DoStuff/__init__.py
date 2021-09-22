@@ -38,8 +38,6 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
 
-
-
     #importing blueprints from specific directories
     from DoStuff.main.routes import main
     from DoStuff.tasks.routes import tasks
@@ -54,7 +52,5 @@ def create_app(config_class=Config):
 
     with app.app_context():
         db.create_all()
-
-
 
     return app

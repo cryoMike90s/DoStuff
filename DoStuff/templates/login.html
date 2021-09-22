@@ -3,13 +3,14 @@
 {% block content %}
 
 
-
+<div class="holder">
     <form action="" method="POST">
 
       {{ form.hidden_tag() }}
 
-      <fieldset class="form-group">
 
+      <fieldset class="form-group" style="margin-bottom: 30px;">
+        <h1 style="margin-bottom: 55px; margin-top: 20px; text-align: center"><strong>Login</strong></h1>
         <div class="form-group">
           <label for="mail">{{ form.email.label }}</label>
 
@@ -30,37 +31,47 @@
           <label for="password_form">{{ form.password.label }}</label>
 
           {% if form.password.errors %}
-          <input type="password" class="form-control is-invalid" id="password_invalid" name="password">
+          <input type="password" class="form-control is-invalid" id="password_invalid" name="password" >
           <div class="invalid-feedback">
             {% for error in form.password.errors %}
             <span>{{ error }}</span>
             {% endfor %}
           </div>
           {% else %}
-          <input type="password" class="form-control" id="password_form" name="password">
+          <input type="password" class="form-control" id="password_form" name="password" placeholder="Must have at least 6 characters">
           {% endif %}
         </div>
 
-        <div class="form-group">
+        <div class="form-group mx-3">
           {{ form.remember_me(class="form-check-input") }}
           {{ form.remember_me.label(class="form-check-label") }}
         </div>
 
-      </fieldset>
 
-      <div class="form-group">
-        {{ form.log_in(class="btn btn-outline-info btn-block") }}
-      </div>
+
+        <div class="form-group mb-1">
+          {{ form.log_in(class="btn  btn-block") }}
+        </div>
 
       <small class="text-muted ml-2">
         <a href="{{ url_for('users.reset_password') }}">Forgot password?</a>
       </small>
 
+      </fieldset>
+
     </form>
 
-  <a href="{{ url_for('users.register') }}">
-  <button class="btn btn-outline-light  btn-block">Sign Up!</button>
-  </a>
+  <div id="sign_up" style=" align-content: center; text-align: center;">
+
+
+    <p>Don't have an account? </p>
+    <a href="{{ url_for('users.register') }}">
+      <button class="btn">Sign Up!</button>
+    </a>
+
+  </div>
+
+</div>
 
 
 

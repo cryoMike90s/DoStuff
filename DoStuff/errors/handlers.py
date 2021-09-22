@@ -4,10 +4,6 @@ from DoStuff.tasks.forms import ProjectForm
 errors = Blueprint('errors', __name__)
 
 
-# @errors.context_processor
-# def new_project_temp():
-#     new_project_form = ProjectForm()
-#     return dict(new_project_form=new_project_form)
 
 @errors.app_errorhandler(404)
 def error_404(error):

@@ -7,6 +7,7 @@ html, body
     background-color: #1e1e2f;
     color: #fff;
     height: 100%
+
 }
 
 
@@ -21,6 +22,11 @@ html, body
     background-color: #ba54f5 !important;
     text-decoration: none;
     color: #fff !important;
+    position: fixed;
+        top: 0;
+        z-index: 999;
+        width: 100%
+
 
 }
 
@@ -67,6 +73,7 @@ html, body
     display: flex;
     align-items: stretch;
     background-color: #1e1e2f;
+    margin: 50px auto 0;
 }
 
 /* WRAPPER KONIEC */
@@ -106,8 +113,12 @@ html, body
     background-color: #1e1e2f;
 }
 
-#sidebar.active {
+#sidebar {
     margin-left: -305px;
+}
+
+#sidebar.active {
+    margin-left: 0px;
 }
 
 
@@ -302,7 +313,35 @@ html, body
     padding: 15px;
 }
 
+
+
 /* CONTENT KONIEC */
+
+
+/* HOME */
+
+
+.main_page
+{
+    min-height: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.main_page .row
+{
+    justify-content: center;
+
+}
+
+.main_page .row #new_user_proj
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* HOME END */
+
 
 
 /* ANONYMOUS */
@@ -314,22 +353,60 @@ html, body
     align-items: center;
 }
 
-.anon .container .form-group
+.anon .container .holder
 {
     background-color: #32325d;
-    padding: 10px;
+    padding: 40px;
     border-radius: 12px 12px 12px 12px;
 }
 
-.anon .container  .btn {
-    background-color: #32325d;
-    padding: 10px;
+
+
+.anon .container .holder .btn
+{
+    background-color: #1e1e2f;
+    color: #fff;
     border-radius: 12px 12px 12px 12px;
 }
+
+.anon .container .holder .btn:hover
+{
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+    background-color: #ba54f5;
+}
+
+
+.anon .container .holder #sign_up .btn
+{
+    background-color: transparent;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.anon .container .holder #sign_up .btn:hover
+{
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+    background-color: #ba54f5;
+}
+
+.anon .container .holder #back_to_login
+{
+    padding-top: 20px;
+}
+
+
+
+
 
 /* ANONYMOUS ENDS */
 
 /* ACCOUNT */
+
+
 
 
 
@@ -340,12 +417,61 @@ html, body
 
 }
 
-.container #account-info
+.container .row .btn
 {
-    display: flex;
-    align-content: center;
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+}
+
+.container .row .btn:hover
+{
+    background-color: #ba54f5;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+}
+
+
+
+
+/* ACCOUNT ENDS */
+
+/* MODAL */
+
+.modal-content
+{
+    background-color: #ba54f5;
+}
+
+/* MODAL ENDS */
+
+
+.section-header .navbar-nav .dropdown-menu
+{
+    background-color: #ba54f5;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+    padding: 10px;
+    border-top: 2px solid #1e1e2f;
+}
+
+.section-header .navbar-nav .dropdown-menu .dropdown-item
+{
+
+    color: #fff;
 
 }
+
+.section-header .navbar-nav .dropdown-menu a:hover
+{
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px 12px 12px 12px;
+}
+
+
+
+
 
 
 
