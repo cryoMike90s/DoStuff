@@ -2,52 +2,57 @@
 
 {% block content %}
 
+
 <div class="holder">
 
-<form action="" method="POST">
-    {{ form.hidden_tag() }}
-    <fieldset class="form-group">
-        <h1 style="margin-bottom: 55px; margin-top: 20px; text-align: center"><strong>Reset Password</strong></h1>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
 
-        <div class="form-group">
-            {{ form.password.label(class="form-control-label") }}
+        <fieldset class="form-group">
 
-            {% if form.password.errors %}
-            {{ form.email(class='form-control form-control-lg is-invalid') }}
-            <div class = "invalid-feedback">
-                {% for error in form.password.errors %}
-                <span> {{ error }}</span>
-                {% endfor %}
+            <h1 style="margin-bottom: 55px; margin-top: 20px; text-align: center"><strong>Reset Password</strong></h1>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+
+                {% if form.password.errors %}
+                {{ form.email(class='form-control form-control-lg is-invalid') }}
+                <div class = "invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span> {{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
-            {% else %}
-            {{ form.password(class="form-control form-control-lg") }}
-            {% endif %}
-        </div>
 
-        <div class="form-group">
-            {{ form.confirm_password.label(class="form-control-label") }}
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-control-label") }}
 
-            {% if form.confirm_password.errors %}
-            {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.confirm_password.errors %}
-                <span> {{ error }}</span>
-                {% endfor %}
+                {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                    <span> {{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.confirm_password(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
-            {% else %}
-            {{ form.confirm_password(class="form-control form-control-lg") }}
-            {% endif %}
+
+        </fieldset>
+
+        <div>
+            <div class="form-group">
+                {{ form.reset(class="btn btn-block") }}
+            </div>
         </div>
 
-    </fieldset>
-    <div>
-        <div class="form-group">
-            {{ form.reset(class="btn btn-block") }}
-        </div>
-    </div>
-
-</form>
+    </form>
 
 </div>
+
 
 {% endblock %}

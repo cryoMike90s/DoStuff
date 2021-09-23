@@ -4,10 +4,14 @@ from flask_login import UserMixin
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
-# handle session in the background, decorator puprose to give information for extension that this is the function to get
-# user by an ID
+
 @login_manager.user_loader
 def load_user(user_id):
+    """
+    Flask-Login knows nothing about db, it needs app help in loading a user. That is the reason the app will
+    configure a user_loader func, that can be called to load a user by giving the ID. The load user is registered
+    with the decorator.
+    """
     return User.query.get(int(user_id))
 
 
@@ -17,7 +21,9 @@ class User(db.Model, UserMixin):
     SQLAlchemy database class for User, that inherits from db.Model base class of Flask-SQLAlchemy
     Args:
         db.Model: Base class of Flask SQLAlchemy
-        UserMixin:
+        UserMixin: Flask-Login works with the app's user model and expect certain prop. `is_authenticated`, `is_active`,
+                    `is_anonymous`, `get_id()`. Instead of implement all of them separately there is class UserMixin
+                    class which provides generic implementation of them
 
     """
     id = db.Column(db.Integer, primary_key=True)
@@ -29,11 +35,12 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         """
-        Method which tells Python how to print objects of class, useful for debugging
+        Method which tells Python how to print objects of class
         """
         return "User( '{}', '{}', '{}')".format(self.user_name, self.email, self.image_file)
 
     def get_secret_token(self, expiration_time=1800):
+        """Creates a secret token which would be send on user email"""
         s = Serializer(current_app.config['SECRET_KEY'], expiration_time)
         return s.dumps({'user_id': self.id}).decode('utf-8')
 

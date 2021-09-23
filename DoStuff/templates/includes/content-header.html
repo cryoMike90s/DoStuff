@@ -1,6 +1,8 @@
 
 
 <header id="view_header">
+
+
     <div class="row flex-nowrap justify-content-between align-items-center">
 
         <div class="col-4 ">
@@ -11,7 +13,9 @@
 
 
             <ul class="navbar-nav">
+
                 <li class="nav-item dropdown">
+
                     <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" class="bi bi-three-dots" viewBox="0 0 16 16">
                             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
@@ -20,22 +24,25 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#AddModal" data-toggle="modal" data-target="#AddModal">Add Task</a>
-
                         <a class="dropdown-item" href="#UpdateProjectModal" data-toggle="modal" data-target="#UpdateProjectModal">Update Project</a>
-
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#DeleteProjectModal" data-toggle="modal" data-target="#DeleteProjectModal">Delete Project</a>
-
                     </div>
+
                 </li>
+
             </ul>
+
 
         </div>
     </div>
 
+
 </header>
 
+<!-- Modal menu for new task creation for specific project responsible form: form  -->
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
+
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,6 +55,7 @@
             <form method="POST" action="{{ url_for('tasks.add_task', project_id=project_number.id) }}">
                 {{ form.hidden_tag()  }}
                 <fieldset class="form-group">
+
                     <div class="modal-body">
 
                         <div class="form-group">
@@ -58,7 +66,7 @@
                             {{ form.task_name(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
                                 {% for error in form.task_name.errors %}
-                                <span>{{ error }}</span>
+                                    <span>{{ error }}</span>
                                 {% endfor %}
                             </div>
 
@@ -85,18 +93,24 @@
                         </div>
 
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input class="btn btn-info" type="submit" value="Add">
                     </div>
+
                 </fieldset>
             </form>
 
         </div>
     </div>
+
 </div>
 
+
+<!-- Modal menu for update project, responsible form: form_update  -->
 <div class="modal fade" id="UpdateProjectModal" tabindex="-1" role="dialog" aria-labelledby="#UpdateProjectModalLabel" aria-hidden="true">
+
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,45 +119,46 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <form method="POST" action="{{ url_for('tasks.update_project', project_id=project_number.id) }}">
                 {{ form_update.hidden_tag()  }}
                 <fieldset class="form-group">
-            <div class="modal-body">
+
+                    <div class="modal-body">
 
 
-                        <div class="form-group">
-                            {{ form_update.project_name.label(class="form-control-label") }}
+                                <div class="form-group">
+                                    {{ form_update.project_name.label(class="form-control-label") }}
 
-                            {% if form_update.project_name.errors %}
+                                    {% if form_update.project_name.errors %}
 
-                            {{ form_update.project_name(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form_update.project_name.errors %}
-                                <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                                    {{ form_update.project_name(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form_update.project_name.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
 
-                            {% else %}
-                            {{ form_update.project_name(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
+                                    {% else %}
+                                    {{ form_update.project_name(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                </div>
+                    </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input class="btn btn-info" type="submit" value="Update">
+                    </div>
 
-
-
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input class="btn btn-info" type="submit" value="Update">
-            </div>
                 </fieldset>
             </form>
         </div>
     </div>
+
 </div>
 
+
+<!-- Modal menu for delete project, responsible form: lack  -->
 <div class="modal fade" id="DeleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="#DeleteProjectModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

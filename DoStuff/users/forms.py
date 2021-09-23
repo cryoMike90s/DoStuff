@@ -13,13 +13,15 @@ class RegisterForm(FlaskForm):
     password_confirmation = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit_me = SubmitField('Register')
 
-    #Checking if input (user_name) is already in database, is so, then user get message about it
     def validate_user_name(self, user_name):
+        """
+        Function that check if current input (user_name) is already in database, if so, then user would get message
+        about this fact
+        """
         user = User.query.filter_by(user_name=user_name.data).first()
         if user:
             raise ValidationError('This username is already taken please choose different one')
 
-    #Checking if input (email) is already in database
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:

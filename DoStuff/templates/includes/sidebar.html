@@ -1,28 +1,35 @@
 
 
     <nav id="sidebar">
+
         <div class="sidebar-header">
             <h3>DoStuff</h3>
         </div>
 
         <div class="section">
-        <ul class="list-unstyled components">
-            <li>
 
+
+        <ul class="list-unstyled components">
+
+            <li>
                 <a href="#NewProjectModal" data-toggle="modal" data-target="#NewProjectModal">New Project</a>
             </li>
             <li class="active">
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Projects</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
 
+
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <!-- loop that allow for view list of current user project, connected with app_context_processor
+                        in main.routes -->
                     {% for project_nav in project_list() %}
                     <li>
                         <a href="{{ url_for('tasks.specific_project', project_id=project_nav.id) }}">{{ project_nav.project_name }}</a>
                     </li>
                     {% endfor %}
 
-
                 </ul>
+
+
             </li>
             <li>
                 <a href="#">Portfolio</a>
@@ -30,13 +37,15 @@
 
         </ul>
 
+
         </div>
 
     </nav>
 
 
-
+    <!-- Modal menu for new project creation,  responsible form: new_project_form  -->
     <div class="modal fade" id="NewProjectModal" tabindex="-1" role="dialog" aria-labelledby="NewProjectModalLabel" aria-hidden="true">
+
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -45,10 +54,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <form method="POST" action="{{ url_for('tasks.new_project_2') }}">
                     {{new_project_form.hidden_tag()  }}
                     <fieldset class="form-group">
-                <div class="modal-body">
+
+                        <div class="modal-body">
                             <div class="form-group">
                                 {{ new_project_form.project_name.label(class="form-control-label") }}
 
@@ -57,7 +68,7 @@
                                 {{ new_project_form.project_name(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
                                     {% for error in new_project_form.project_name.errors %}
-                                    <span>{{ error }}</span>
+                                        <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
 
@@ -66,21 +77,18 @@
                                 {% endif %}
                             </div>
 
+                        </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input class="btn btn-info" type="submit" value="Add">
+                        </div>
 
-
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        <input class="btn btn-info" type="submit" value="Add">
-
-                </div>
                     </fieldset>
                 </form>
+
             </div>
         </div>
+
     </div>
 

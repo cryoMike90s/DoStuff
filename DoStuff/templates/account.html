@@ -2,11 +2,14 @@
 
 {% block content %}
 
-<div class="container px-3 py-3">
-    <div class="row" style="background-color: #32325d; border-radius: 12px 12px 12px 12px; ">
-        <div class="col-md-6">
-            <form action="" method="POST" enctype="multipart/form-data">
 
+<div class="container px-3 py-3">
+
+    <div class="row" style="background-color: #32325d; border-radius: 12px 12px 12px 12px; ">
+
+        <div class="col-md-6">
+
+            <form action="" method="POST" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
 
                 <fieldset class="form-group">
@@ -53,8 +56,6 @@
                         {% endif %}
                     </div>
 
-
-
                 </fieldset>
 
                 <div class="form-group">
@@ -62,9 +63,10 @@
                 </div>
 
             </form>
-        </div>
-        <div class="col-md-6 mx-auto my-auto" style=" align-content: center; text-align: center;">
 
+        </div>
+
+        <div class="col-md-6 mx-auto my-auto" style=" align-content: center; text-align: center;">
 
             <div style="padding-bottom: 35px">
                 <img class="rounded-circle account-img" src="{{ img_file }}">
@@ -74,12 +76,11 @@
                 <p class="text-secondary">{{ current_user.email }}</p>
             </div>
 
-
         </div>
+
     </div>
 
-
-
 </div>
+
 
 {% endblock content %}

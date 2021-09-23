@@ -30,7 +30,6 @@ def specific_project(project_id):
      Args:
         project_id (int): value for dynamic parameter, we expect number so that's why int, bounded with Project class
     """
-
     project_number = Projects.query.get_or_404(project_id)
 
     if project_number.owner != current_user:  # owner is backref for relationship btw. User and Projects classes
@@ -53,10 +52,10 @@ def specific_project(project_id):
 @tasks.route('/home/<int:project_id>/update', methods=['POST'])
 @login_required
 def update_project(project_id):
-
-    """Basic function for update name od project, project_id as argument in url_for() allows for redirect
-        to updated project by number"""
-
+    """
+    Basic function for update name od project, project_id as argument in url_for() allows for redirect
+    to updated project by number
+    """
     form_update = ProjectForm()
     project_number = Projects.query.get_or_404(project_id)
     project_number.project_name = form_update.project_name.data
@@ -105,10 +104,10 @@ def delete_task(task_id):
 @tasks.route('/<int:task_id>/update', methods=['POST', 'GET'])
 @login_required
 def update_task(task_id):
-
-    """Function connected with modal function in 'project_and_tasks.html', current content is automatically assigned
-        to forms field (GET request statement), and could be modified that's why if statement"""
-
+    """
+    Function connected with modal function in 'project_and_tasks.html', current content is automatically assigned
+    to forms field (GET request statement), and could be modified that's why if statement
+    """
     task_form_update = TaskForm()
     task = Tasks.query.get_or_404(task_id)
     project_number = Projects.query.get_or_404(task.project_parent)
@@ -118,9 +117,11 @@ def update_task(task_id):
         task.content = task_form_update.content.data
         db.session.commit()
         flash("Task successfully updated !", 'success')
+
         return redirect(url_for('tasks.specific_project', project_id=str(project_number.id)))
 
     elif request.method == 'GET':
         task_form_update.task_name.data = task.task_name
         task_form_update.task_content.data = task.content
+
         return redirect(url_for('tasks.specific_project', project_id=str(project_number.id)))

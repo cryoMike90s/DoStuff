@@ -13,7 +13,6 @@ users = Blueprint('users', __name__)
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
-
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))  # if user is logged then redirect automatically to main.home route
 
@@ -36,7 +35,6 @@ def register():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     """ Basic landing page for unauthenticated users """
-
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
 
@@ -75,7 +73,7 @@ def account():
     is assigned during registration of new user. Part of change user picture is connected with save_image()
     function located in `utils.py` where name of original picture file is processing and then saved
 
-    new_project_form in render_template() return is intentionaly located here to allow for rendering
+    new_project_form in render_template() return is intentionally located here to allow for rendering
     tasks.new_project_2 function
     """
     form = UpdateAccountForm()
@@ -134,7 +132,6 @@ def reset_token(token):
     change his password and that change is committed to database, but when token is not valid or expired note
     is rendering to user
     """
-
     if current_user.is_authenticated:
         return redirect(url_for('users.home'))
 
