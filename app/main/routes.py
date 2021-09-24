@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flask_login import login_required
-from DoStuff.tasks.utils import project_list
-from DoStuff.tasks.forms import ProjectForm
+from app.tasks.utils import project_list
+from app.tasks.forms import ProjectForm
 
 
 

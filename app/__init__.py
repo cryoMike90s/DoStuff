@@ -41,10 +41,10 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
 
     # importing blueprints from specific directories
-    from DoStuff.main.routes import main
-    from DoStuff.tasks.routes import tasks
-    from DoStuff.users.routes import users
-    from DoStuff.errors.handlers import errors
+    from app.main.routes import main
+    from app.tasks.routes import tasks
+    from app.users.routes import users
+    from app.errors.handlers import errors
 
     # register of those Blueprints
     app.register_blueprint(main)

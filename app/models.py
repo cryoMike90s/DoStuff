@@ -1,5 +1,5 @@
 from flask import current_app
-from DoStuff import db, login_manager
+from app import db, login_manager
 from flask_login import UserMixin
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -57,7 +57,7 @@ class User(db.Model, UserMixin):
 class Projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     project_name = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    # date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     tasks = db.relationship('Tasks', backref='parent', cascade='all,delete', lazy=True)
 

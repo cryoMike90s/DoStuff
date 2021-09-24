@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError
 from wtforms.validators import Length, DataRequired, Email, EqualTo
 from flask_wtf.file import FileField, FileAllowed
-from DoStuff.models import User
+from app.models import User
 from flask_login import current_user
 
 

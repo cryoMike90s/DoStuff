@@ -1,7 +1,7 @@
 import os
 import secrets
 from PIL import Image
-from DoStuff import current_app
+from app import current_app
 
 
 def save_image(form_picture):

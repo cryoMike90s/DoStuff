@@ -1,5 +1,7 @@
 # Default ignored files
 /shelf/
-/.idea
+/.idea/workspace.xml
 /__pycache__
+dockerfile_explained.md
 
+dostuff.db

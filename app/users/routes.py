@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, redirect, flash, url_for, request
-from DoStuff.users.forms import RegisterForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
-from DoStuff.models import User
+from app.users.forms import RegisterForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from app.models import User
 from flask_login import login_user, current_user, logout_user, login_required
-from DoStuff import db, bcrypt
-from DoStuff.users.utils import save_image
-from DoStuff.users.email import send_reset_email
-from DoStuff.tasks.forms import ProjectForm
+from app import db, bcrypt
+from app.users.utils import save_image
+from app.users.email import send_reset_email
+from app.tasks.forms import ProjectForm
 
 
 users = Blueprint('users', __name__)

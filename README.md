@@ -13,6 +13,7 @@
 * [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
+* [Deployment](#deployment)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [License](#license)
@@ -50,7 +51,7 @@ List the ready features here:
 
 
 ## Setup
-```
+```shell
 # Get the code
 git clone https://github.com/cryoMike90s/DoStuff.git
 cd DoStuff
@@ -93,6 +94,22 @@ To make possible to use that mail support there is need to set environmental
 variables in Your system or just directly change the value of two last line in
 file mention above
 
+##Deployment
+
+### Docker Execution
+```shell
+# Get the code
+git clone https://github.com/cryoMike90s/DoStuff.git
+cd DoStuff
+
+# Install an image on your docker (You can change name and tag)
+docker run --name dostuff2 -d -p 8000:5000 dostuffer:latest
+
+# Run container (Remember to use correct tag quoted during image creation
+docker build -t dostuffer:latest .
+
+```
+
 
 ## Project Status
 Project is: _in progress_ 
@@ -101,7 +118,7 @@ Project is: _in progress_
 ## Room for Improvement
 To do:
 - Enable Full-Text Search Engine
-- Deployment on Docker Containers
+- Deployment on Docker Container: DONE
 - A better front end structure
 - Introduction of calendar with possibility to allocate task for specific days
 

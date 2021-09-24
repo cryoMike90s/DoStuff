@@ -1,4 +1,4 @@
-from DoStuff.models import Projects
+from app.models import Projects
 from flask_login import current_user
 
 

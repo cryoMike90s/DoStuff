@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request, abort, flash
-from DoStuff.models import Projects, Tasks
+from app.models import Projects, Tasks
 from flask_login import current_user
-from DoStuff.tasks.forms import ProjectForm, TaskForm
-from DoStuff import db
+from app.tasks.forms import ProjectForm, TaskForm
+from app import db
 
 from flask_login import login_required
 

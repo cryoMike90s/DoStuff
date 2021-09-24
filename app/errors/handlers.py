@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from DoStuff.tasks.forms import ProjectForm
+from app.tasks.forms import ProjectForm
 
 errors = Blueprint('errors', __name__)
 
