@@ -21,6 +21,7 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <!-- loop that allow for view list of current user project, connected with app_context_processor
                         in main.routes -->
+
                     {% for project_nav in project_list() %}
                     <li>
                         <a href="{{ url_for('tasks.specific_project', project_id=project_nav.id) }}">{{ project_nav.project_name }}</a>

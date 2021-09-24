@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template
-from flask_login import login_required
+from flask import Blueprint, render_template, request, redirect, url_for
+from flask_login import login_required, current_user
 from app.tasks.utils import project_list
 from app.tasks.forms import ProjectForm
 
@@ -10,11 +10,23 @@ main = Blueprint('main', __name__)
 
 
 
+
+
 @main.app_context_processor
 def inject_to_all():
-    """ Inject list of current user projects for loop on sidebar, 'app_context_processor' allow to write code once
-        for all existing routes"""
+    """
+     Inject list of current user projects for loop on sidebar, 'app_context_processor' allow to write code once
+    for all existing routes
+    """
     return dict(project_list=project_list)
+
+
+@main.route('/')
+def redirect_route():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+    else:
+        return redirect(url_for('users.login'))
 
 
 @main.route('/home')

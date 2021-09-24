@@ -31,7 +31,7 @@ def register():
     return render_template('register.html', title='Registration page', form=form)
 
 
-@users.route('/')
+
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     """ Basic landing page for unauthenticated users """
@@ -54,6 +54,8 @@ def login():
 
         else:
             flash("Login Unsuccessful. Please check email and password", "danger")
+
+            return redirect(url_for('users.login'))
 
     return render_template('login.html', title='Log In', form=form)
 

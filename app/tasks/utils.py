@@ -8,4 +8,5 @@ def project_list():
     connected with app_context_processor in main.routes
     """
     projects_nav = Projects.query.filter_by(user_id=current_user.id)
+
     return projects_nav
